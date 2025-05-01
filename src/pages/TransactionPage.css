@@ -1,0 +1,233 @@
+/* Genel */
+body, .transaction-page {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+  }
+  
+  /* Header */
+  .header {
+    padding: 15px 30px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    z-index: 100;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .header .logo h1 {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  
+  /* Main */
+  .main {
+    padding-top: 80px;
+    height: calc(100% - 80px);
+  }
+  
+  .earnings-section {
+    padding: 20px;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  
+  .content-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .col-4,
+  .col-8 {
+    flex: 1 1 300px;
+  }
+  
+  /* Sol kart */
+  .earnings-card {
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    color: white;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+  }
+  
+  .earnings-label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .earnings-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Sağ kutu */
+  .options-container {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .donation-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  .donation-item {
+    cursor: pointer;
+    text-align: center;
+    width: 45%;
+    padding: 10px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  
+  .donation-item:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .donation-item img {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .donation-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  /* Ayraç */
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .divider .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #ccc;
+  }
+  
+  .divider .text {
+    padding: 0 10px;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  /* Hesaba aktarım */
+  .account-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .account-button:hover {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+  }
+  
+  /* Geri dön linki */
+  .footer-section {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .back-link {
+    font-size: 1rem;
+    color: #6c757d;
+    text-decoration: none;
+  }
+  
+  .back-link:hover {
+    color: #343a40;
+  }
+  
+  /* Modal */
+  .confirmation-modal {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .modal-text {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .modal-btn {
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .confirm-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #388E3C;
+  }
+  
+  .cancel-btn {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #d0d0d0;
+  }
+  

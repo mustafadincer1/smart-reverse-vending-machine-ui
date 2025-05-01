@@ -1,0 +1,104 @@
+html, body, .index-page {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  padding: 0 50px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  z-index: 1000;
+}
+
+.header .logo h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #002366;
+  margin: 0;
+}
+
+.header-logo img {
+  width: 130px;
+}
+
+.main {
+  padding-top: 100px;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-align: center;
+  color: #002366;
+}
+
+.hero p {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #7a7a7a;
+}
+
+.hero-img img {
+  width: 80%;
+  max-width: 450px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.hero-img img:hover {
+  transform: scale(1.05);
+}
+
+.scroll-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  background: #59c137;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.scroll-top.active {
+  display: flex;
+}
+
+
+@media (max-width: 1280px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .hero p {
+    font-size: 1.5rem;
+  }
+
+  .hero-img img {
+    max-width: 400px;
+  }
+
+  .header {
+    height: 80px;
+    padding: 0 30px;
+  }
+
+  .header .logo h1 {
+    font-size: 1rem;
+  }
+}
