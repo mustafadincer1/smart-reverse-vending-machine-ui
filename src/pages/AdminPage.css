@@ -1,0 +1,125 @@
+﻿/* Global reset & overflow gizle */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
+.admin-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    padding: 15px 30px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 100;
+}
+
+    .header h1 {
+        font-size: 1.8rem;
+        color: #002366;
+    }
+
+.logo-img {
+    width: 170px;
+}
+
+/* Main alan */
+.main {
+    flex: 1;
+    padding-top: 80px; /* header kadar boşluk */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hero / orta bölüm */
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 0;
+}
+
+/* Kapı kontrol butonları */
+.door-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.door-button {
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    color: #fff;
+    border: none;
+    padding: 20px 40px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(76,175,80,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+    .door-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(76,175,80,0.4);
+    }
+
+    .door-button i {
+        font-size: 2rem;
+    }
+
+    /* Üst kapı butonu için mavi ton */
+    .door-button.upper {
+        background: linear-gradient(135deg, #2196F3, #1976D2);
+        box-shadow: 0 10px 25px rgba(33,150,243,0.3);
+    }
+
+        .door-button.upper:hover {
+            box-shadow: 0 15px 30px rgba(33,150,243,0.4);
+        }
+
+/* Yüksek çözünür portr. tablet için */
+@media screen and (width: 800px) and (height: 1280px) {
+    .door-controls {
+        gap: 25px;
+    }
+
+    .door-button {
+        padding: 25px 45px;
+        font-size: 1.6rem;
+    }
+
+        .door-button i {
+            font-size: 2.2rem;
+        }
+}
+
+/* scroll-top butonunu gizle */
+#scroll-top {
+    display: none;
+}
