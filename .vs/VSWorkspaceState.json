@@ -1,13 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\build\\assets",
-    "\\build\\assets\\css",
     "\\public",
-    "\\public\\ikons",
+    "\\public\\assets",
+    "\\public\\assets\\css",
     "\\src",
+    "\\src\\components",
     "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\pages\\LoginPage.css",
+  "SelectedNode": "\\src\\pages\\LoginPage.jsx",
   "PreviewInSolutionExplorer": false
 }

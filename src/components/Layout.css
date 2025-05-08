@@ -1,0 +1,197 @@
+/* src/components/Layout.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f9ff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.app-background {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #f6f9ff;
+}
+
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+    .app-header h1 {
+        font-size: 1.8rem;
+        color: #002366;
+        margin: 0;
+        font-weight: 700;
+    }
+
+.header-logo {
+    height: 40px;
+}
+
+.app-content {
+    flex: 1;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding-top: 100px;
+}
+
+/* Info Section Styles from RecyclePage */
+.info-section {
+    text-align: center;
+}
+
+    .info-section h2 {
+        font-size: 2.5rem;
+        color: #002366;
+        margin: 0;
+    }
+
+    .info-section p {
+        font-size: 1.2rem;
+        color: #2e4c6d;
+        margin: 0.5rem 0 0;
+    }
+
+/* Card Styles from RecyclePage */
+.card-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2.5rem;
+    width: 90%;
+    max-width: 550px;
+}
+
+.info-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+    .info-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .info-card.total .icon {
+        display: none;
+    }
+
+.icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.card-content {
+    flex: 1;
+    margin: 0 1rem;
+}
+
+    .card-content h3 {
+        margin: 0;
+        font-size: 1.6rem;
+        color: #2e4c6d;
+    }
+
+    .card-content p {
+        margin: 0;
+        font-size: 0.95rem;
+        color: #2e4c6d;
+    }
+
+.card-values {
+    display: flex;
+    gap: 1rem;
+}
+
+    .card-values .adet,
+    .card-values .puan {
+        padding: 0.6rem 1.2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    .card-values .adet {
+        background: linear-gradient(135deg, #56f268, #2f8d45);
+        color: #fff;
+    }
+
+    .card-values .puan {
+        background: linear-gradient(135deg, #56f268, #2f8d45);
+        color: #fff;
+    }
+
+/* Action Area Styles from RecyclePage */
+.action-area {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+    .action-area h2 {
+        font-size: 2rem;
+        color: #2e4c6d;
+        margin-bottom: 0.5rem;
+    }
+
+.complete-button {
+    width: 180px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    border-radius: 12px;
+}
+
+    .complete-button:hover {
+        transform: scale(1.05);
+    }
+
+/* Tablet Compatibility */
+@media (max-width: 1280px) {
+    .app-header {
+        height: 80px;
+    }
+
+        .app-header h1 {
+            font-size: 1.8rem;
+        }
+
+    .main {
+        gap: 3rem;
+    }
+
+    .card-list {
+        gap: 2rem;
+    }
+
+    .action-area {
+        margin-top: 1.5rem;
+    }
+}
