@@ -1,4 +1,5 @@
-﻿import React, { useEffect, useState } from "react";
+﻿/* CompletePage.jsx */
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CompletePage.css";
 
@@ -6,23 +7,18 @@ const CompletePage = () => {
     const navigate = useNavigate();
     const [showScroll, setShowScroll] = useState(false);
 
-    // 8 saniye sonra ana sayfaya yönlendir
     useEffect(() => {
         const timer = setTimeout(() => navigate("/"), 8000);
         return () => clearTimeout(timer);
     }, [navigate]);
 
-    // Scroll-to-Top butonunu göster/gizle
     useEffect(() => {
-        const onScroll = () => {
-            setShowScroll(window.pageYOffset > 300);
-        };
+        const onScroll = () => setShowScroll(window.pageYOffset > 300);
         window.addEventListener("scroll", onScroll);
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    const scrollToTop = () =>
-        window.scrollTo({ top: 0, behavior: "smooth" });
+    const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
     const icons = [
         { alt: "Denizleri Koru", src: "ikons/denizleri-koru.png" },
@@ -35,27 +31,15 @@ const CompletePage = () => {
         <div className="complete-page">
             <header className="header">
                 <h1>Akıllı Geri Dönüşüm Otomatı</h1>
-                <img
-                    src="ikons/atkazan.png"
-                    alt="At Kazan Logo"
-                    className="header-logo"
-                />
+                <img src="ikons/atkazan.png" alt="At Kazan Logo" className="header-logo" />
             </header>
 
             <main className="hero">
-                <img
-                    src="ikons/atkazan-harfli.png"
-                    alt="AtKazan Logo"
-                    className="logo-main"
-                />
+                <img src="ikons/atkazan-harfli.png" alt="AtKazan Logo" className="logo-main" />
 
                 <div className="message-box">
-                    <h1 className="complete-title">
-                        İŞLEMİNİZ TAMAMLANMIŞTIR
-                    </h1>
-                    <p className="points-info">
-                        PUANLARINIZ 15 dk. İÇİNDE YÜKLENECEKTİR
-                    </p>
+                    <h1 className="complete-title">İŞLEMİNİZ TAMAMLANMIŞTIR</h1>
+                    <p className="points-info">PUANLARINIZ 15 dk. İÇİNDE YÜKLENECEKTİR</p>
                 </div>
 
                 <div className="icons-container">
@@ -65,14 +49,13 @@ const CompletePage = () => {
                         </div>
                     ))}
                 </div>
+
+                {/* Ana Sayfaya Dön Butonu */}
+                <button className="home-button" onClick={() => navigate("/")}>Ana Sayfaya Dön</button>
             </main>
 
             {showScroll && (
-                <button
-                    className="scroll-top"
-                    onClick={scrollToTop}
-                    aria-label="Scroll to top"
-                >
+                <button className="scroll-top" onClick={scrollToTop} aria-label="Scroll to top">
                     ↑
                 </button>
             )}

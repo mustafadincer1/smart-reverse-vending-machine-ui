@@ -23,7 +23,7 @@ const RecyclePage = () => {
         if (!token || !transactionNumber || connectionRef.current) return;
 
         const conn = new HubConnectionBuilder()
-            .withUrl("http://localhost:5190/barcodeHub", {
+            .withUrl("http://192.168.1.102:5190/barcodeHub", {
                 accessTokenFactory: () => token,
             })
             .configureLogging(LogLevel.Information)
@@ -52,7 +52,7 @@ const RecyclePage = () => {
     const handleComplete = async () => {
         try {
             const res = await fetch(
-                `http://localhost:5190/api/Transaction/${transactionNumber}/reward`,
+                `http://192.168.1.102:5190/api/Transaction/${transactionNumber}/reward`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             const data = await res.json();
@@ -75,6 +75,7 @@ const RecyclePage = () => {
         <div className="recycle-page">
             <header className="header fixed-top d-flex align-items-center">
                 <div className="container-fluid d-flex align-items-center justify-content-between">
+                  
                     <div className="logo d-flex align-items-center">
                         <h1>Akıllı Geri Dönüşüm Otomatı</h1>
                     </div>

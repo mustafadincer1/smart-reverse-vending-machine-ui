@@ -1,3 +1,4 @@
+// LoginPage.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -8,11 +9,10 @@ function LoginPage() {
     const [values, setValues] = useState({ phone: "", password: "" });
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const [isOptimalSize, setIsOptimalSize] = useState(true);  // Ekran boyutu kontrolü
+    const [isOptimalSize, setIsOptimalSize] = useState(true);
     const navigate = useNavigate();
     const { setToken, setTransactionNumber } = useAuth();
 
-    // Ekran boyutunu kontrol eden effect
     useEffect(() => {
         const checkSize = () => {
             const w = window.innerWidth;
@@ -28,9 +28,8 @@ function LoginPage() {
         return () => window.removeEventListener("resize", checkSize);
     }, []);
 
-    const handleChange = (e) => {
+    const handleChange = (e) =>
         setValues({ ...values, [e.target.name]: e.target.value });
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,23 +48,20 @@ function LoginPage() {
             setLoading(true);
             setError("");
 
-            // 1. Giriş isteği
-            const loginRes = await axios.post("http://localhost:5190/api/Auth/login", {
-                phoneNumber,
-                password: values.password,
-            });
+            const loginRes = await axios.post(
+                "http://192.168.1.102:5190/api/Auth/login",
+                { phoneNumber, password: values.password }
+            );
             const token = loginRes.data.token;
             setToken(token);
 
-            // 2. İşlem başlatma isteği
             const startRes = await axios.post(
-                "http://localhost:5190/api/Transaction/start",
+                "http://192.168.1.102:5190/api/Transaction/start",
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setTransactionNumber(startRes.data.transactionNumber);
 
-            // **Yönlendirme**: artık profile sayfasına
             navigate("/profile");
         } catch (err) {
             const msg = err.response?.data?.Error || "Giriş başarısız.";
@@ -79,16 +75,21 @@ function LoginPage() {
         <div className="login-page">
             {!isOptimalSize && (
                 <div className="size-warning">
-                    Uyarı: Ekran boyutu 800×1280 değil. Optimal görünüm için lütfen tableti doğru oryantasyona getirin.
+                    Uyarı: Ekran boyutu 800×1280 değil. Optimal görünüm için lütfen tableti
+                    doğru oryantasyona getirin.
                 </div>
             )}
+
             <header className="header fixed-top d-flex align-items-center">
                 <div className="container-fluid d-flex align-items-center justify-content-between">
+                    <button className="modern-back-btn" onClick={() => navigate(-1)}>
+                        <i className="bi bi-arrow-left"></i>
+                    </button>
                     <div className="logo d-flex align-items-center">
                         <h1>Akıllı Geri Dönüşüm Otomatı</h1>
                     </div>
                     <div>
-                        <img src="ikons/atkazan.png" width="170px" alt="Logo" />
+                        <img src="ikons/atkazan.png" width="170" alt="Logo" />
                     </div>
                 </div>
             </header>
@@ -125,6 +126,7 @@ function LoginPage() {
                                                 required
                                             />
                                         </div>
+
                                         <button
                                             type="submit"
                                             className="btn btn-login w-100"
@@ -132,8 +134,11 @@ function LoginPage() {
                                         >
                                             {loading ? "Yükleniyor..." : "Giriş Yap"}
                                         </button>
-                                        <div className="register-link mt-3">
-                                            Hesabınız yok mu? <a href="#/register">Kayıt Ol</a>
+                                        <div className="register-link mt-3 text-center">
+                                            Hesabınız yok mu?{' '}
+                                            <a href="#/register" className="link-button">
+                                                Kayıt Ol
+                                            </a>
                                         </div>
                                     </form>
                                 </div>

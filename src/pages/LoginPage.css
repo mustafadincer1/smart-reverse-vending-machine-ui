@@ -1,93 +1,101 @@
-/* Sayfa yüksekliği tam olmalı */
+/* LoginPage.css */
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  background-color: #f6f9ff;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f9ff;
 }
 
 /* Header */
 .header {
-  padding: 30px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  box-shadow: none;
-  border-bottom: none;
+    padding: 30px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    box-shadow: none;
+    border-bottom: none;
 }
 
-.header .logo h1 {
-  font-size: 2rem;
-  color: #002366;
-  font-weight: 700;
-  margin: 0;
+    .header .logo h1 {
+        font-size: 2rem;
+        color: #002366;
+        font-weight: 700;
+        margin: 0;
+    }
+
+/* Modern back button */
+.modern-back-btn {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Ana içerik */
+    .modern-back-btn i {
+        font-size: 1.2rem;
+        color: #2e4c6d;
+    }
+
+    .modern-back-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
 .main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 100px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
 }
 
-/* Giriş formu */
 .login-form {
-  padding: 3rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.8);
-  max-width: 600px;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
 }
 
-.login-form h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2e4c6d;
-}
+    .login-form h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2e4c6d;
+    }
 
 .form-control {
-  height: 55px;
-  border-radius: 12px;
+    height: 55px;
+    border-radius: 12px;
 }
 
 .btn-login {
-  background: linear-gradient(135deg, #56f268, #2f8d45);
-  color: white;
-  font-size: 1.2rem;
-  height: 55px;
-  border-radius: 12px;
+    background: linear-gradient(135deg, #56f268, #2f8d45);
+    color: white;
+    font-size: 1.2rem;
+    height: 55px;
+    border-radius: 12px;
 }
 
-.forgot-password {
-  text-decoration: none;
-  color: #2E4C6D;
-  font-weight: 500;
-}
-
-/* Responsive */
 @media (max-width: 1280px) {
-  .hero h1 {
-    font-size: 3rem;
-  }
+    .header {
+        height: 80px;
+    }
 
-  .hero p {
-    font-size: 1.5rem;
-  }
+        .header .logo h1 {
+            font-size: 1.8rem;
+        }
 
-  .header {
-    height: 80px;
-  }
-
-  .header .logo h1 {
-    font-size: 1.8rem;
-  }
-
-  .login-form {
-    padding: 2rem;
-  }
+    .login-form {
+        padding: 2rem;
+    }
 }

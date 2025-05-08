@@ -1,15 +1,19 @@
-// src/pages/TransactionPage.jsx
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
 import "./TransactionPage.css";
 
 const TransactionPage = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
+    const { token, transactionNumber } = useAuth();
     const totalReward = state?.totalReward ?? 0;
 
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const options = [
         { name: "Doğa ve Çevre Vakfı", icon: "doga-ve-cevre-bagisla.png" },
@@ -18,17 +22,38 @@ const TransactionPage = () => {
         { name: "TEMA", icon: "tema-bagisla.png" },
     ];
 
-    // Bağış veya kendi hesaba al işlemi için modal aç
+    // Açılışta veya seçenek tıklanınca modal göster
     const handleSelect = (name) => {
         setSelectedOption(name);
+        setError("");
         setModalVisible(true);
     };
 
-    // Onaylandığında tamamla
-    const confirmSelection = () => {
-        navigate("/complete", {
-            state: { totalReward, selectedOption }
-        });
+    // Onaylandığında API çağrısı ve yönlendirme
+    const confirmSelection = async () => {
+        try {
+            setLoading(true);
+            setError("");
+            // Tamamlama endpoint'ine istek gönder
+            await axios.post(
+                `http://192.168.1.102:5190/api/Transaction/complete/${transactionNumber}`,
+                {
+                    selectedOption,
+                    totalReward
+                },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            // Başarılıysa tamam sayfasına yönlendir
+            navigate("/complete", {
+                state: { totalReward, selectedOption }
+            });
+        } catch (err) {
+            const msg = err.response?.data?.Error || "İşlem tamamlanamadı.";
+            setError(msg);
+        } finally {
+            setLoading(false);
+            setModalVisible(false);
+        }
     };
 
     return (
@@ -40,7 +65,6 @@ const TransactionPage = () => {
 
             <main className="main hero section">
                 <div className="transaction-container">
-
                     {/* Sol panel */}
                     <div className="earnings-panel">
                         <div className="label">Toplam Kazancınız</div>
@@ -67,7 +91,6 @@ const TransactionPage = () => {
 
                         <div className="divider"><span>VEYA</span></div>
 
-                        {/* Kendi hesabına al da artık modal açıyor */}
                         <button
                             className="own-account-btn"
                             onClick={() => handleSelect("Kendi Hesabıma Aktar")}
@@ -75,8 +98,10 @@ const TransactionPage = () => {
                             KENDİ HESABINA AL
                         </button>
                     </div>
-
                 </div>
+
+                {/* Hata mesajı */}
+                {error && <div className="alert alert-danger mt-3 text-center">{error}</div>}
             </main>
 
             {/* Onay Modal */}
@@ -91,14 +116,16 @@ const TransactionPage = () => {
                             <button
                                 className="modal-btn cancel"
                                 onClick={() => setModalVisible(false)}
+                                disabled={loading}
                             >
                                 Vazgeç
                             </button>
                             <button
                                 className="modal-btn confirm"
                                 onClick={confirmSelection}
+                                disabled={loading}
                             >
-                                Onaylıyorum
+                                {loading ? 'Gönderiliyor...' : 'Onaylıyorum'}
                             </button>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
-﻿/* Global reset & overflow gizle */
+﻿/* AdminPage.css */
+
 html, body {
     height: 100%;
     margin: 0;
@@ -13,7 +14,6 @@ html, body {
     flex-direction: column;
 }
 
-/* Header */
 .header {
     padding: 15px 30px;
     height: 80px;
@@ -36,15 +36,13 @@ html, body {
     width: 170px;
 }
 
-/* Main alan */
 .main {
     flex: 1;
-    padding-top: 80px; /* header kadar boşluk */
+    padding-top: 80px;
     display: flex;
     flex-direction: column;
 }
 
-/* Hero / orta bölüm */
 .hero {
     flex: 1;
     display: flex;
@@ -55,14 +53,13 @@ html, body {
     min-height: 0;
 }
 
-/* Kapı kontrol butonları */
 .door-controls {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 40px; /* alt boşluk bırak */
     padding: 20px;
 }
 
@@ -93,7 +90,6 @@ html, body {
         font-size: 2rem;
     }
 
-    /* Üst kapı butonu için mavi ton */
     .door-button.upper {
         background: linear-gradient(135deg, #2196F3, #1976D2);
         box-shadow: 0 10px 25px rgba(33,150,243,0.3);
@@ -103,7 +99,40 @@ html, body {
             box-shadow: 0 15px 30px rgba(33,150,243,0.4);
         }
 
-/* Yüksek çözünür portr. tablet için */
+/* Main içi yan yana butonlar */
+.action-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .footer-button.close-app {
+        background-color: #e53935;
+        color: #fff;
+    }
+
+        .footer-button.close-app:hover {
+            background-color: #d32f2f;
+        }
+
+    .footer-button.go-home {
+        background-color: #2196f3;
+        color: #fff;
+    }
+
+        .footer-button.go-home:hover {
+            background-color: #1976d2;
+        }
+
 @media screen and (width: 800px) and (height: 1280px) {
     .door-controls {
         gap: 25px;
@@ -119,7 +148,6 @@ html, body {
         }
 }
 
-/* scroll-top butonunu gizle */
 #scroll-top {
     display: none;
 }

@@ -1,4 +1,4 @@
-﻿/* Google Font */
+﻿/* CompletePage.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 * {
@@ -117,6 +117,24 @@
         object-fit: contain;
     }
 
+/* Ana Sayfaya Dön Butonu */
+.home-button {
+    margin-top: 40px;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    background: #002366;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+    .home-button:hover {
+        transform: scale(1.05);
+    }
+
 /* Scroll-to-Top Butonu */
 .scroll-top {
     position: fixed;
@@ -197,5 +215,11 @@
     .icon-item {
         width: 120px;
         height: 120px;
+    }
+
+    .home-button {
+        font-size: 1rem;
+        padding: 10px 20px;
+        margin-top: 30px;
     }
 }

@@ -55,7 +55,7 @@ function RegisterPage() {
             setError("");
 
             // Kayıt isteği
-            await axios.post("http://localhost:5190/api/Auth/register", {
+            await axios.post("http://192.168.1.102:5190/api/Auth/register", {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 phoneNumber,
