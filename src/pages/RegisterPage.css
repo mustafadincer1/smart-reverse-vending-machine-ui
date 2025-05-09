@@ -1,87 +1,122 @@
 ﻿/* src/pages/RegisterPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
-/* Sayfa yüksekliği tam olmalı */
-html, body {
+html, body, .register-page {
     height: 100%;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+    font-family: 'Roboto', sans-serif;
     background-color: #f6f9ff;
 }
 
-/* Header */
-.header {
-    padding: 30px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    background-color: transparent;
-    box-shadow: none;
-    border-bottom: none;
-}
-
-    .header .logo h1 {
-        font-size: 2rem;
-        color: #002366;
-        font-weight: 700;
-        margin: 0;
-    }
-
-/* Ana içerik */
 .main {
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding-top: 100px;
+    gap: 1.5rem;
 }
 
-/* Kayıt formu */
 .register-form {
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
+    width: 90%;
+    max-width: 450px;
+    background: transparent;
+    padding: 2.5rem;
 }
 
     .register-form h2 {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #2e4c6d;
+        font-size: 2.2rem;
+        color: #002366;
+        margin-bottom: 1rem;
+        text-align: center;
     }
 
-.form-control {
-    height: 55px;
-    border-radius: 12px;
-}
-
-.btn-register {
-    background: linear-gradient(135deg, #56f268, #2f8d45);
-    color: white;
-    font-size: 1.2rem;
-    height: 55px;
-    border-radius: 12px;
-}
-
-.login-link a {
-    color: #2e4c6d;
+.error-message {
+    color: #d93025;
+    margin-bottom: 1rem;
     font-weight: 500;
-    text-decoration: none;
+    text-align: center;
 }
 
-/* Responsive */
-@media (max-width: 1280px) {
-    .header {
-        height: 80px;
+.register-form label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 500;
+    color: #2e4c6d;
+    text-align: left;
+}
+
+.register-form input {
+    width: 100%;
+    height: 55px;
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: #fafafa;
+    font-size: 1rem;
+}
+.register-form .login-link {
+    font-size: 1.1rem; /* yazı boyutunu biraz artırdık */
+    margin-top: 1.5rem; /* form ile arasında boşluk */
+    text-align: center; /* ortalı kalabilir, isterseniz sola da alabilirsiniz */
+}
+.btn-register {
+    width: 100%;
+    height: 55px;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #56f268, #2f8d45);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+    .btn-register:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
     }
 
-        .header .logo h1 {
-            font-size: 1.8rem;
-        }
+    .btn-register:hover:not(:disabled) {
+        transform: scale(1.03);
+    }
 
+.form-links {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: #56f268;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+}
+
+    .link-button:hover {
+        text-decoration: underline;
+    }
+
+@media (max-width: 1280px) {
     .register-form {
         padding: 2rem;
+    }
+
+        .register-form h2 {
+            font-size: 2rem;
+        }
+
+    .btn-register {
+        font-size: 1rem;
     }
 }

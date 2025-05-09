@@ -1,93 +1,143 @@
-/* Sayfa yüksekliği tam olmalı */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  background-color: #f6f9ff;
+/* src/pages/LoginPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+html, body, .login-page {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f6f9ff;
 }
 
-/* Header */
-.header {
-  padding: 30px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-  box-shadow: none;
-  border-bottom: none;
+.size-warning {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffcc00;
+    color: #2e4c6d;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    z-index: 1000;
 }
 
-.header .logo h1 {
-  font-size: 2rem;
-  color: #002366;
-  font-weight: 700;
-  margin: 0;
-}
-
-/* Ana içerik */
 .main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 100px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
 }
 
-/* Giriş formu */
 .login-form {
-  padding: 3rem;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  background: rgba(255, 255, 255, 0.8);
-  max-width: 600px;
+    width: 90%;
+    max-width: 450px;
+    background: #fff;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-.login-form h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2e4c6d;
+    .login-form h2 {
+        font-size: 2.2rem;
+        color: #002366;
+        margin-bottom: 1.5rem;
+    }
+
+.error-message {
+    color: #d93025;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
-.form-control {
-  height: 55px;
-  border-radius: 12px;
+.login-form label {
+    display: block;
+    text-align: left;
+    margin-top: 1rem;
+    font-weight: 500;
+    color: #2e4c6d;
+}
+
+.login-form input {
+    width: 100%;
+    height: 55px;
+    margin-top: 0.5rem;
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background: #fafafa;
+    font-size: 1rem;
 }
 
 .btn-login {
-  background: linear-gradient(135deg, #56f268, #2f8d45);
-  color: white;
-  font-size: 1.2rem;
-  height: 55px;
-  border-radius: 12px;
+    width: 100%;
+    height: 55px;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #56f268, #2f8d45);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-.forgot-password {
-  text-decoration: none;
-  color: #2E4C6D;
-  font-weight: 500;
+    .btn-login:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    .btn-login:hover:not(:disabled) {
+        transform: scale(1.03);
+    }
+
+.form-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
 }
 
-/* Responsive */
+.forgot-password,
+.back-link {
+    background: none;
+    border: none;
+    color: #56f268;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+}
+
+    .forgot-password:hover,
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+.register-link {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #2e4c6d;
+}
+
+    .register-link a {
+        color: #56f268;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
 @media (max-width: 1280px) {
-  .hero h1 {
-    font-size: 3rem;
-  }
+    .login-form {
+        padding: 2.5rem;
+    }
 
-  .hero p {
-    font-size: 1.5rem;
-  }
+        .login-form h2 {
+            font-size: 2rem;
+        }
 
-  .header {
-    height: 80px;
-  }
-
-  .header .logo h1 {
-    font-size: 1.8rem;
-  }
-
-  .login-form {
-    padding: 2rem;
-  }
+    .btn-login {
+        font-size: 1rem;
+    }
 }

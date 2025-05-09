@@ -1,125 +1,129 @@
-﻿/* Global reset & overflow gizle */
-html, body {
-    height: 100%;
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+html, body, .admin-page {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    height: 100%;
     font-family: 'Roboto', sans-serif;
+    background-color: #f6f9ff;
 }
 
-.admin-page {
-    height: 100vh;
+.admin-hero {
     display: flex;
     flex-direction: column;
-}
-
-/* Header */
-.header {
-    padding: 15px 30px;
-    height: 80px;
-    display: flex;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    z-index: 100;
-}
-
-    .header h1 {
-        font-size: 1.8rem;
-        color: #002366;
-    }
-
-.logo-img {
-    width: 170px;
-}
-
-/* Main alan */
-.main {
-    flex: 1;
-    padding-top: 80px; /* header kadar boşluk */
-    display: flex;
-    flex-direction: column;
-}
-
-/* Hero / orta bölüm */
-.hero {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 20px;
-    min-height: 0;
+    flex: 1;
+    padding: 1rem;
+    gap: 2rem;
 }
 
-/* Kapı kontrol butonları */
 .door-controls {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 100%;
+    gap: 1.5rem;
+    width: 90%;
     max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
 }
 
 .door-button {
-    background: linear-gradient(135deg, #4CAF50, #388E3C);
-    color: #fff;
-    border: none;
+    width: 100%;
     padding: 20px 40px;
     font-size: 1.5rem;
     font-weight: 600;
+    border: none;
     border-radius: 15px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(76,175,80,0.3);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 25px rgba(76,175,80,0.3);
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    color: #fff;
 }
 
-    .door-button:hover {
+    .door-button:hover:not(:disabled) {
         transform: translateY(-5px);
         box-shadow: 0 15px 30px rgba(76,175,80,0.4);
     }
 
-    .door-button i {
-        font-size: 2rem;
-    }
-
-    /* Üst kapı butonu için mavi ton */
     .door-button.upper {
         background: linear-gradient(135deg, #2196F3, #1976D2);
         box-shadow: 0 10px 25px rgba(33,150,243,0.3);
     }
 
-        .door-button.upper:hover {
+        .door-button.upper:hover:not(:disabled) {
             box-shadow: 0 15px 30px rgba(33,150,243,0.4);
         }
 
-/* Yüksek çözünür portr. tablet için */
-@media screen and (width: 800px) and (height: 1280px) {
-    .door-controls {
-        gap: 25px;
+.message {
+    width: 90%;
+    max-width: 600px;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+    .message.success {
+        background-color: #e7f9ed;
+        color: #2f8d45;
+        border: 1px solid #2f8d45;
     }
 
+    .message.error {
+        background-color: #fdecea;
+        color: #d93025;
+        border: 1px solid #d93025;
+    }
+
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+.footer-button {
+    flex: 1;
+    padding: 15px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .footer-button.close-app {
+        background-color: #e53935;
+        color: #fff;
+    }
+
+        .footer-button.close-app:hover {
+            background-color: #d32f2f;
+        }
+
+    .footer-button.go-home {
+        background-color: #2196f3;
+        color: #fff;
+    }
+
+        .footer-button.go-home:hover {
+            background-color: #1976d2;
+        }
+
+@media (max-width: 1280px) {
     .door-button {
-        padding: 25px 45px;
-        font-size: 1.6rem;
+        padding: 25px 35px;
+        font-size: 1.3rem;
     }
 
         .door-button i {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
         }
-}
-
-/* scroll-top butonunu gizle */
-#scroll-top {
-    display: none;
 }

@@ -2,12 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\public",
-    "\\public\\assets",
-    "\\public\\assets\\css",
     "\\src",
     "\\src\\components",
     "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\pages\\LoginPage.jsx",
+  "SelectedNode": "\\src\\pages\\CompletePage.jsx",
   "PreviewInSolutionExplorer": false
 }
