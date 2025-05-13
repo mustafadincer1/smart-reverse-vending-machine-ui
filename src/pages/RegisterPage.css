@@ -1,122 +1,218 @@
 ﻿/* src/pages/RegisterPage.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
-html, body, .register-page {
-    height: 100%;
+/* Global reset & box-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+/* Fullscreen layout fixed to 800×1280 viewport */
+html, body, .register-page {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     font-family: 'Roboto', sans-serif;
     background-color: #f6f9ff;
+    position: relative;
 }
 
+/* Base font size for readability */
+html {
+    font-size: 16px; /* Reduced from 22px to fit more content */
+}
+
+/* Center main content vertically & horizontally */
 .main {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding-top: 100px;
-    gap: 1.5rem;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 0.5rem; /* Reduced gap */
+    padding: 1rem; /* Added some padding */
 }
 
+/* Register form container */
 .register-form {
-    width: 90%;
-    max-width: 450px;
-    background: transparent;
-    padding: 2.5rem;
+    /*display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;*/ /* Slightly wider */
+    /*max-width: 600px;
+    background: #fff;
+    padding: 1rem;*/ /* Reduced padding */
+    /*border-radius: 25px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: relative;
+    max-height: 95%;*/ /* Ensure it doesn't overflow */
+    /*overflow-y: auto;*/ /* Fallback scrolling if needed */
+    /*height: 100%;*/ /* Full height */
+    position: relative;
+    width: 80vw; /* ~680px on 800px-wide screen */
+    max-width: 800px;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/*.register-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}*/
 
+    /* Heading and error */
     .register-form h2 {
-        font-size: 2.2rem;
+        font-size: 3.5rem; /* ~80px */
         color: #002366;
-        margin-bottom: 1rem;
-        text-align: center;
+        margin-bottom: 1.7rem;
+        letter-spacing: 1px;
     }
 
 .error-message {
-    color: #d93025;
+    width: 100%;
+    font-size: 1.6rem;
+    color: #d32f2f;
     margin-bottom: 1rem;
-    font-weight: 500;
-    text-align: center;
+    text-align: left;
 }
 
+/* Labels and inputs */
 .register-form label {
     display: block;
-    margin-top: 1rem;
+    text-align: left;
+    font-size: 2rem;
     font-weight: 500;
     color: #2e4c6d;
-    text-align: left;
+    margin: 1.4rem 0 0.5rem;
 }
 
 .register-form input {
     width: 100%;
-    height: 55px;
-    margin-top: 0.5rem;
-    padding: 0 1rem;
+    height: 5rem;
+    padding: 0 1.2rem;
     border: 1px solid #ccc;
-    border-radius: 12px;
-    background: #fafafa;
-    font-size: 1rem;
+    border-radius: 19px;
+    background: #fff;
+    font-size: 1.6rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.register-form .login-link {
-    font-size: 1.1rem; /* yazı boyutunu biraz artırdık */
-    margin-top: 1.5rem; /* form ile arasında boşluk */
-    text-align: center; /* ortalı kalabilir, isterseniz sola da alabilirsiniz */
+
+    .register-form input::placeholder {
+        color: #aaa;
+        font-size: 1.9rem;
+    }
+.register-form input:focus {
+    outline: none;
+    border-color: #002366;
+    box-shadow: 0 0 8px rgba(0, 35, 102, 0.2);
 }
+
+/* Register button */
 .btn-register {
     width: 100%;
-    height: 55px;
-    margin-top: 2rem;
+    height: 5rem;
+    margin-top: 3rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 16px;
     background: linear-gradient(135deg, #56f268, #2f8d45);
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: 700;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
     .btn-register:disabled {
-        opacity: 0.7;
+        opacity: 0.6;
         cursor: not-allowed;
     }
 
     .btn-register:hover:not(:disabled) {
-        transform: scale(1.03);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(86, 242, 104, 0.3);
     }
 
-.form-links {
-    display: flex;
-    gap: 2rem;
+/* Login link */
+.login-link {
     margin-top: 2rem;
-    text-align: center;
+    font-size: 1.9rem;
+    color: #2e4c6d;
+    padding: 0.5rem 0;
 }
 
-.link-button {
-    background: none;
-    border: none;
-    color: #56f268;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0;
-}
-
-    .link-button:hover {
-        text-decoration: underline;
+    .login-link a {
+        color: #4caf50;
+        font-weight: 520;
+        text-decoration: none;
     }
 
-@media (max-width: 1280px) {
-    .register-form {
-        padding: 2rem;
-    }
-
-        .register-form h2 {
-            font-size: 2rem;
+        .login-link a:hover {
+            text-decoration: underline;
         }
+Geri dön bloğu
+.back-container {
+    text-align: center;
+    margin-top: 4rem;
+    cursor: pointer;
+}
 
-    .btn-register {
-        font-size: 1rem;
+.return-icon {
+    position: static;
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: auto;
+    transition: transform 0.2s ease;
+}
+
+İkonun hover efekti
+.return-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Altındaki metin */
+.back-text {
+    display: block;
+    font-size: 1.8rem; /* form yazı tipleriyle uyumlu boyut */
+    color: #2e4c6d;
+    margin-top: 0.5rem;
+}
+
+Metin hover efekti
+.back-text:hover {
+    text-decoration: underline;
+}
+
+/* Ensure no overflow */
+.login-page {
+    overflow: hidden;
+}
+
+
+/* Fallback for wider screens */
+@media (min-width: 801px) {
+    /* Use original styles if viewport >800px */
+}
+
+/* Ensure tight layout for 800x1280 viewport */
+@media screen and (max-height: 1280px) and (max-width: 800px) {
+    html {
+        font-size: 12px; /* Further reduce font size if needed */
+    }
+
+    .main {
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .register-form {
+        padding: 1.4rem;
     }
 }

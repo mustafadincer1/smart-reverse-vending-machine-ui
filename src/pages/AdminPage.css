@@ -15,13 +15,13 @@ html, body, .admin-page {
     justify-content: center;
     flex: 1;
     padding: 1rem;
-    gap: 2rem;
+    gap: 3.5rem;
 }
 
 .door-controls {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 3.5rem;
     width: 90%;
     max-width: 600px;
 }
@@ -63,7 +63,7 @@ html, body, .admin-page {
     max-width: 600px;
     padding: 1rem 1.5rem;
     border-radius: 12px;
-    font-size: 1rem;
+    font-size: 2rem;
     text-align: center;
 }
 
@@ -81,7 +81,7 @@ html, body, .admin-page {
 
 .action-buttons {
     display: flex;
-    gap: 1.5rem;
+    gap: 3.5rem;
     flex-wrap: wrap;
     justify-content: center;
     width: 90%;
@@ -91,7 +91,7 @@ html, body, .admin-page {
 .footer-button {
     flex: 1;
     padding: 15px 0;
-    font-size: 1.1rem;
+    font-size: 2.5rem;
     font-weight: 600;
     border: none;
     border-radius: 10px;
@@ -120,10 +120,10 @@ html, body, .admin-page {
 @media (max-width: 1280px) {
     .door-button {
         padding: 25px 35px;
-        font-size: 1.3rem;
+        font-size: 4.3rem;
     }
 
         .door-button i {
-            font-size: 1.8rem;
+            font-size: 3.8rem;
         }
 }

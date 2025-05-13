@@ -1,37 +1,59 @@
 /* src/pages/MainPage.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
+/* Global box-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Fullscreen container without scrolling */
 html, body, .main-page {
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     font-family: 'Roboto', sans-serif;
 }
 
+/* Base font for readability */
+html {
+    font-size: 30px; /* 1rem = 20px */
+}
+
+/* Override Layout padding to prevent vertical overflow */
+.main {
+    padding-top: 0;
+}
+
+/* Hero section fits exactly under header */
 .hero {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 80px);
+    width: 100%;
+    height: calc(100% - 80px);
     text-align: center;
     padding: 0 1rem;
 }
 
 .hero-content h1 {
-    font-size: 3.5rem;
+    font-size: 5rem; /* 60px */
     font-weight: 800;
     color: #002366;
     margin: 0;
 }
 
 .hero-content p {
-    font-size: 1.8rem;
+    font-size: 2.5rem; /* 30px */
     color: #7a7a7a;
-    margin: 1rem 0 2rem;
+    margin: 0.5rem 0 1.5rem;
 }
 
+/* Start button/icon */
 .hero-start .start-icon {
-    width: 80%;
-    max-width: 300px;
+    width: 450px;
+    max-width: 70%;
     height: auto;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -41,15 +63,16 @@ html, body, .main-page {
         transform: scale(1.05);
     }
 
+/* Scroll-to-top button */
 .scroll-top {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    right: 1rem;
+    bottom: 1rem;
     background: #59c137;
     color: #fff;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: none;
     align-items: center;
     justify-content: center;
@@ -60,7 +83,8 @@ html, body, .main-page {
         display: flex;
     }
 
-@media (max-width: 1280px) {
+/* Fallback for wider screens */
+@media (min-width: 801px) {
     .hero-content h1 {
         font-size: 3rem;
     }
@@ -70,6 +94,13 @@ html, body, .main-page {
     }
 
     .hero-start .start-icon {
-        max-width: 250px;
+        max-width: 300px;
+    }
+
+    .scroll-top {
+        width: 50px;
+        height: 50px;
+        right: 20px;
+        bottom: 20px;
     }
 }

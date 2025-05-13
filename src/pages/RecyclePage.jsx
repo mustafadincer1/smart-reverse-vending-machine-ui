@@ -75,7 +75,7 @@ const RecyclePage = () => {
     return (
         <Layout>
             <div className="recycle-container">
-                <div className="info-section" data-aos="fade-up">
+                <div className="info-section">
                     <h2>Geri Dönüşüm Bilgileri</h2>
                     <p>Doğayı Kurtarmak İçin Geri Dönüştür</p>
                 </div>

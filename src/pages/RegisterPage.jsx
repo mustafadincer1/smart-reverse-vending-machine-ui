@@ -23,8 +23,8 @@ const RegisterPage = () => {
     const handleChange = e => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
-    const goToLogin = () => {
-        navigate('/login');
+    const goToMain = () => {
+        navigate('/');
     };
 
     const handleSubmit = async e => {
@@ -77,7 +77,7 @@ const RegisterPage = () => {
         <Layout>
             <main className="main">
                 <form className="register-form" onSubmit={handleSubmit}>
-                    <h2>Kayıt Ol</h2>
+                    <h2>KAYIT OL</h2>
                     {error && <div className="error-message">{error}</div>}
 
                     <label htmlFor="firstName">İsim</label>
@@ -153,12 +153,14 @@ const RegisterPage = () => {
                     </div>
                 </form>
 
-                <img
-                    src={`${process.env.PUBLIC_URL}/ikons/left.png`}
-                    alt="Girişe dön"
-                    className="left-icon"
-                    onClick={goToLogin}
-                />
+                <div className="back-container" onClick={goToMain}>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/ikons/left.png`}
+                        alt="Ana sayfaya dön"
+                        className="return-icon"
+                    />
+                    <span className="back-text">Ana sayfaya dön</span>
+                </div>
             </main>
         </Layout>
     );

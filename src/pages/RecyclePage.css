@@ -1,105 +1,114 @@
 /* src/pages/RecyclePage.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 
-/* Recycle Container - Ana kapsayıcı */
+/* —— Recycle Container —— */
 .recycle-container {
     width: 100%;
-    max-width: 760px;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 1rem;
-    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    color: #1F2937;
 }
 
-/* Info Section - Bilgi Bölümü */
+/* —— Info Section —— */
 .info-section {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3.5rem;
 }
 
     .info-section h2 {
-        font-size: 2rem;
+        font-size: 4rem;
+        font-weight: 700;
         color: #002366;
         margin: 0;
-        font-weight: 700;
+        line-height: 1.2;
     }
 
     .info-section p {
-        font-size: 1.1rem;
-        color: #2e4c6d;
+        font-size: 2rem;
+        font-weight: 500;
+        color: #374151;
         margin: 0.5rem 0 0;
+        line-height: 1.4;
     }
 
-/* Card List - Kart Listesi */
+/* —— Card List —— */
 .card-list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr; /* Mobilde tek sütun */
+    gap: 1.5rem;
     margin-bottom: 2rem;
 }
 
-/* Info Card - Bilgi Kartları */
+/* İki sütun için 801px üzeri */
+@media (min-width: 801px) {
+    .card-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* —— Info Card —— */
 .info-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.5rem 1.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 1.25rem 1.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
     .info-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     }
 
+    /* Total kart için ufak ayar */
     .info-card.total {
-        background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-        border: 1px solid #bae6fd;
+        background: linear-gradient(135deg, #E0F2FE, #BAE6FD);
+        border: none;
     }
 
-        .info-card.total .icon {
-            display: none;
-        }
-
-/* Icon - İkon */
+/* —— Icon —— */
 .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
 }
 
     .icon img {
-        width: 48px;
-        height: 48px;
+        width: 72px;
+        height: 72px;
         object-fit: contain;
     }
 
-/* Card Content - Kart içeriği */
+/* —— Card Content —— */
 .card-content {
     flex: 1;
-    margin: 0 1.25rem;
+    margin: 0 1.5rem;
 }
 
     .card-content h3 {
         margin: 0;
-        font-size: 1.4rem;
+        font-size: 3rem;
+        font-weight: 600;
         color: #002366;
-        font-weight: 700;
+        line-height: 1.6;
+        margin-bottom: 0.5rem;
     }
 
     .card-content p {
-        margin: 0.25rem 0 0;
-        font-size: 0.9rem;
-        color: #64748b;
+        margin: 0;
+        font-size: 2rem;
+        color: #4B5563;
+        line-height: 1.6;
     }
 
-/* Card Values - Kart Değerleri */
+/* —— Card Values —— */
 .card-values {
     display: flex;
     gap: 0.75rem;
@@ -108,50 +117,49 @@
 
     .card-values .adet,
     .card-values .puan {
-        padding: 0.6rem 1rem;
+        padding: 0.75rem 1rem;
         border-radius: 12px;
+        font-size: 2rem;
         font-weight: 600;
-        font-size: 0.95rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        min-width: 90px;
     }
 
     .card-values .adet {
         background: linear-gradient(135deg, #56f268, #2f8d45);
         color: #fff;
-        min-width: 85px;
     }
 
     .card-values .puan {
         background: linear-gradient(135deg, #4f46e5, #312e81);
         color: #fff;
-        min-width: 85px;
     }
 
+/* Total kart içindeki puan rengi */
 .info-card.total .card-values .puan {
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
 }
 
-/* Action Area - Aksiyon Alanı */
+/* —— Action Area —— */
 .action-area {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
+    margin: 2.5rem 0 1.5rem;
     position: relative;
 }
 
 .complete-button {
     position: relative;
-    width: 220px; /* Daha büyük buton */
+    width: 340px;
+    padding: 0;
     border: none;
     background: transparent;
     cursor: pointer;
-    padding: 0;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 24px;
     filter: drop-shadow(0px 10px 25px rgba(0, 0, 0, 0.25));
-    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.35s ease;
 }
 
     .complete-button img {
@@ -163,7 +171,7 @@
 
     .complete-button:hover {
         transform: scale(1.08) translateY(-5px);
-        filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.3));
+        filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.30));
     }
 
     .complete-button:active {
@@ -178,7 +186,7 @@
     height: 100%;
     background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
     opacity: 0;
-    transition: opacity 0.5s;
+    transition: opacity 0.5s ease;
     pointer-events: none;
 }
 
@@ -186,57 +194,35 @@
     opacity: 1;
 }
 
+/* —— Loading Indicator —— */
 .loading-indicator {
     margin-top: 0.8rem;
-    color: #4a5568;
-    font-size: 0.9rem;
+    color: #6B7280;
+    font-size: 1rem;
     animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
-    0% {
+    0%,100% {
         opacity: 0.6;
     }
 
     50% {
         opacity: 1;
     }
-
-    100% {
-        opacity: 0.6;
-    }
 }
 
-/* 800x1280 Tablet Uyumluluğu */
+/* —— Responsive Ayarlar —— */
 @media (max-width: 800px) {
-    .recycle-container {
-        padding-top: 0;
-    }
-
     .info-section h2 {
-        font-size: 1.8rem;
+        font-size: 4.4rem;
     }
 
     .info-section p {
-        font-size: 1rem;
+        font-size: 2.5rem;
     }
 
     .complete-button {
-        width: 200px; /* Mobil cihazlar için de biraz daha büyük */
-    }
-}
-
-/* Yatay Tablet İçin Optimize Edilmiş */
-@media (min-width: 801px) and (max-width: 1280px) {
-    .card-list {
-        max-width: 680px;
-    }
-
-    .info-card {
-        padding: 1rem 1.25rem;
-    }
-
-    .action-area {
-        margin-top: 1.5rem;
+        width: 500px;
     }
 }

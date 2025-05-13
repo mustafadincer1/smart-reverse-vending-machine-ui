@@ -65,57 +65,60 @@ const LoginPage = () => {
 
     return (
         <Layout>
-                <main className="main">
-                    <div className="login-form">
-                        <h2>Giriş Yap</h2>
-                        {error && <div className="error-message">{error}</div>}
-                        <form onSubmit={handleSubmit}>
-                            <label htmlFor="phone">Telefon Numarası</label>
-                            <input
-                                type="tel"
-                                name="phone"
-                                id="phone"
-                                value={values.phone}
-                                onChange={handleChange}
-                                placeholder="5XX XXX XXXX"
-                                required
-                            />
+            <main className="main">
+                <div className="login-form">
+                    <h2>GİRİŞ YAP</h2>
+                    {error && <div className="error-message">{error}</div>}
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="phone">Telefon Numarası</label>
+                        <input
+                            type="tel"
+                            name="phone"
+                            id="phone"
+                            value={values.phone}
+                            onChange={handleChange}
+                            placeholder="5XX XXX XXXX"
+                            required
+                        />
 
-                            <label htmlFor="password">Parola</label>
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                                value={values.password}
-                                onChange={handleChange}
-                                required
-                            />
+                        <label htmlFor="password">Parola</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            value={values.password}
+                            onChange={handleChange}
+                            required
+                        />
 
-                            <button type="submit" className="btn-login" disabled={loading}>
-                                {loading ? 'Yükleniyor...' : 'Giriş Yap'}
-                            </button>
-                        </form>
-                        <div className="form-links">
-                            <button
-                                type="button"
-                                className="forgot-password"
-                                onClick={() => navigate('/forgot-password')}
-                            >
-                                Parolamı Unuttum?
-                            </button>
-                            
-                        </div>
-                        <div className="register-link">
-                            Hesabınız yok mu? <a href="#/register">Kayıt Ol</a>
-                        </div>
+                        <button type="submit" className="btn-login" disabled={loading}>
+                            {loading ? 'Yükleniyor...' : 'Giriş Yap'}
+                        </button>
+                    </form>
+                    <div className="form-links">
+                        <button
+                            type="button"
+                            className="forgot-password"
+                            onClick={() => navigate('/forgot-password')}
+                        >
+                            Parolamı Unuttum?
+                        </button>
+
+                    </div>
+                    <div className="register-link">
+                        Hesabınız yok mu? <a href="#/register">Kayıt Ol</a>
+                    </div>
+
                 </div>
-                <img
-                    src={`${process.env.PUBLIC_URL}/ikons/return.png`}
-                    alt="Anasayfaya dön"
-                    className="return-icon"
-                    onClick={goToMain}
-                />
-                </main>
+                <div className="back-container" onClick={goToMain}>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/ikons/left.png`}
+                        alt="Ana sayfaya dön"
+                        className="return-icon"
+                    />
+                    <span className="back-text">Ana sayfaya dön</span>
+                </div>
+            </main>
         </Layout>
     );
 };

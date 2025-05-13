@@ -1,24 +1,29 @@
 ﻿/* src/pages/CompletePage.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* —— Ana Sayfa Konteyneri —— */
 .complete-page {
     font-family: 'Roboto', sans-serif;
     background-color: #f6f9ff;
     min-height: 100vh;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px 20px 50px;
+    /* Aşağıdakileri ekledik: */
+    max-width: 1024px; /* Sayfa genişliğinin sınırı */
+    width: 100%;
+    margin: 0 auto; /* Ortaya hizalama */
 }
 
-/* Ana Logo */
+/* —— Ana Logo —— */
 .logo-main {
     max-width: 300px;
     margin-bottom: 40px;
@@ -26,14 +31,15 @@
     animation: fadeInUp 0.8s ease;
 }
 
-/* Mesaj Kutusu */
+/* —— Mesaj Kutusu —— */
 .message-box {
     background: #fff;
     border-radius: 24px;
     padding: 40px;
     text-align: center;
     box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-    max-width: 720px;
+    /* Genişliği büyüttük: */
+    max-width: 880px; /* Eskiden 720px’ti */
     width: 100%;
     margin-bottom: 50px;
     animation: fadeIn 0.8s ease;
@@ -42,23 +48,19 @@
     overflow: hidden;
 }
 
+    /* Eğer mesaj kutusunun sağ üst köşesindeki renkli 'şerit'i de kaldırmak isterseniz: */
     .message-box::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, transparent 50%, rgba(0, 35, 102, 0.08) 50%);
+        display: none;
     }
 
+/* Başlık */
 .complete-title {
     font-size: 2.8rem;
     font-weight: 800;
     color: #002366;
     margin-bottom: 25px;
     letter-spacing: 1px;
-    line-height: 1.2;
+    line-height: 1.6;
     position: relative;
     display: inline-block;
 }
@@ -75,8 +77,9 @@
         border-radius: 2px;
     }
 
+/* Puan Bilgisi Kutusu */
 .points-info {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     background: #f8f9fa;
     padding: 15px 25px;
     border-radius: 12px;
@@ -94,7 +97,7 @@
     }
 
     50% {
-        box-shadow: 0 4px 20px rgba(0, 102, 204, 0.2);
+        box-shadow: 0 4px 20px rgba(0,102,204,0.2);
     }
 
     100% {
@@ -102,13 +105,15 @@
     }
 }
 
-/* İkonlar Bölümü */
+/* —— İkonlar Bölümü —— */
 .icons-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 30px;
-    max-width: 900px;
+    /* Genişliği biraz daha büyüttük: */
+    max-width: 960px; /* Eskiden 900px’ti */
+    width: 100%;
     margin: 0 auto 40px;
     animation: fadeIn 1s ease;
 }
@@ -133,14 +138,9 @@
         box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     }
 
+    /* Çizgiyi tamamen gizliyoruz: */
     .icon-item::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 6px;
-        background: linear-gradient(90deg, #56f268, #2f8d45);
+        display: none;
     }
 
     .icon-item img {
@@ -154,17 +154,17 @@
         transform: scale(1.1);
     }
 
-/* Ana Sayfaya Dön Butonu */
+/* —— Ana Sayfaya Dön Butonu —— */
 .home-button {
     margin-top: 20px;
-    padding: 14px 30px;
-    font-size: 1.2rem;
+    padding: 20px 40px;
+    font-size: 2rem;
     background: linear-gradient(135deg, #002366, #0066cc);
     color: #fff;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0, 35, 102, 0.25);
+    box-shadow: 0 8px 20px rgba(0,35,102,0.25);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -186,14 +186,14 @@
 
     .home-button:hover {
         transform: translateY(-5px);
-        box-shadow: 0 12px 25px rgba(0, 35, 102, 0.35);
+        box-shadow: 0 12px 25px rgba(0,35,102,0.35);
     }
 
         .home-button:hover::before {
             opacity: 1;
         }
 
-/* Scroll-to-Top Butonu */
+/* —— Scroll-to-Top —— */
 .scroll-top {
     position: fixed;
     right: 25px;
@@ -218,10 +218,10 @@
         background: #0066cc;
         color: #fff;
         transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 102, 204, 0.3);
+        box-shadow: 0 8px 25px rgba(0,102,204,0.3);
     }
 
-/* Animasyonlar */
+/* —— Animasyonlar —— */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -244,7 +244,7 @@
     }
 }
 
-/* Responsive */
+/* —— Responsive —— */
 @media (max-width: 1280px) {
     .complete-title {
         font-size: 2.4rem;
@@ -277,7 +277,7 @@
     }
 
     .complete-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
         .complete-title::after {
@@ -292,7 +292,7 @@
     }
 
     .icons-container {
-        gap: 15px;
+        gap: 10px;
     }
 
     .icon-item {
@@ -307,22 +307,21 @@
     }
 }
 
-/* 800x1280 Tablet Uyumluluğu */
 @media (min-width: 769px) and (max-width: 1280px) {
     .complete-page {
         padding: 40px 30px 60px;
     }
 
     .message-box {
-        max-width: 680px;
+        max-width: 880px;
     }
 
     .icons-container {
-        max-width: 700px;
+        max-width: 960px;
     }
 
     .icon-item {
-        width: 150px;
-        height: 150px;
+        width: 170px;
+        height: 170px;
     }
 }

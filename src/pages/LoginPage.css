@@ -1,114 +1,147 @@
-/* src/pages/LoginPage.css */
+﻿/* src/pages/LoginPage.css */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
+/* Global box-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Fullscreen container without scrolling */
 html, body, .login-page {
-    height: 100%;
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     font-family: 'Roboto', sans-serif;
-    background-color: #f6f9ff;
+    background: linear-gradient(135deg, #e3f2fd, #f6f9ff);
 }
 
-.size-warning {
-    position: fixed;
-    top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ffcc00;
-    color: #2e4c6d;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-weight: 500;
-    z-index: 1000;
+/* Base font size: 23px (1rem = 23px) */
+html {
+    font-size: 23px;
 }
 
+/* Main flex container to center content */
 .main {
-    flex: 1;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 100px;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
 }
 
+/* Glassmorphic login card */
 .login-form {
-    width: 90%;
-    max-width: 450px;
-    background: #fff;
+    position: relative;
+    width: 80vw; /* ~680px on 800px-wide screen */
+    max-width: 800px;
     padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/*    .login-form:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }*/
+
+    /* Title styling */
     .login-form h2 {
-        font-size: 2.2rem;
+        font-size: 3.5rem; /* ~80px */
         color: #002366;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.7rem;
+        letter-spacing: 1px;
     }
 
+/* Error message */
 .error-message {
-    color: #d93025;
+    width: 100%;
+    font-size: 1.6rem;
+    color: #d32f2f;
     margin-bottom: 1rem;
-    font-weight: 500;
+    text-align: left;
 }
 
+/* Form labels */
 .login-form label {
     display: block;
     text-align: left;
-    margin-top: 1rem;
+    font-size: 1.8rem;
     font-weight: 500;
     color: #2e4c6d;
+    margin: 1.4rem 0 0.5rem;
 }
 
+/* Input fields */
 .login-form input {
     width: 100%;
-    height: 55px;
-    margin-top: 0.5rem;
-    padding: 0 1rem;
+    height: 5rem;
+    padding: 0 1.2rem;
     border: 1px solid #ccc;
-    border-radius: 12px;
-    background: #fafafa;
-    font-size: 1rem;
+    border-radius: 19px;
+    background: #fff;
+    font-size: 1.6rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+    .login-form input::placeholder {
+        color: #aaa;
+        font-size: 1.8rem;
+    }
+
+    .login-form input:focus {
+        outline: none;
+        border-color: #002366;
+        box-shadow: 0 0 8px rgba(0, 35, 102, 0.2);
+    }
+
+/* Login button */
 .btn-login {
     width: 100%;
-    height: 55px;
-    margin-top: 2rem;
+    height: 5rem;
+    margin-top: 3rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 16px;
     background: linear-gradient(135deg, #56f268, #2f8d45);
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: 700;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
     .btn-login:disabled {
-        opacity: 0.7;
+        opacity: 0.6;
         cursor: not-allowed;
     }
 
     .btn-login:hover:not(:disabled) {
-        transform: scale(1.03);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(86, 242, 104, 0.3);
     }
 
+/* Form links (forgot password) */
 .form-links {
     display: flex;
     justify-content: space-between;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+    font-size: 1.8rem;
 }
 
 .forgot-password,
 .back-link {
     background: none;
     border: none;
-    color: #56f268;
-    font-size: 0.95rem;
-    font-weight: 500;
+    color: #4caf50;
+    font-weight: 700;
     cursor: pointer;
-    padding: 0;
 }
 
     .forgot-password:hover,
@@ -116,28 +149,58 @@ html, body, .login-page {
         text-decoration: underline;
     }
 
+/* Register link */
 .register-link {
     margin-top: 2rem;
-    font-size: 0.95rem;
+    font-size: 1.8rem;
     color: #2e4c6d;
 }
 
     .register-link a {
-        color: #56f268;
+        color: #4caf50;
+        font-weight: 540;
         text-decoration: none;
-        font-weight: 500;
     }
 
-@media (max-width: 1280px) {
-    .login-form {
-        padding: 2.5rem;
-    }
-
-        .login-form h2 {
-            font-size: 2rem;
+        .register-link a:hover {
+            text-decoration: underline;
         }
 
-    .btn-login {
-        font-size: 1rem;
+ Geri dön bloğu 
+.back-container {
+    text-align: center;
+    margin-top: 4rem;
+    cursor: pointer;
+}
+
+.return-icon {
+    position: static;  
+    display: block;
+    margin: 0 auto; 
+    width: 80px;  
+    height: auto;
+    transition: transform 0.2s ease;
+}
+
+     İkonun hover efekti 
+    .return-icon:hover {
+        transform: scale(1.1);
     }
+
+/* Altındaki metin */
+.back-text {
+    display: block;
+    font-size: 1.9rem; /* form yazı tipleriyle uyumlu boyut */
+    color: #2e4c6d;
+    margin-top: 0.5rem;
+}
+
+     Metin hover efekti 
+    .back-text:hover {
+        text-decoration: underline;
+    }
+
+/* Ensure no overflow */
+.login-page {
+    overflow: hidden;
 }
