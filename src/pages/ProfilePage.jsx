@@ -30,19 +30,20 @@ const ProfilePage = () => {
             setError('');
             try {
                 // Fetch actual user profile
-                const res = await axios.get(
+                const res = await axios.post(
                     'http://192.168.1.102:5190/api/user/profile',
-                    { headers: { Authorization: `Bearer ${token}` } }
-                );
+                    {}, 
+                    { headers: { Authorization: `Bearer ${token}` } } // headers burada
+                    );
                 const data = res.data;
                 setProfile({
-                    firstName: data.FirstName,
-                    lastName: data.LastName,
-                    email: data.Email,
-                    phone: data.PhoneNumber,
-                    petCount: data.PlasticCount,
-                    canCount: data.MetalCount,
-                    totalReward: data.TotalReward,
+                    firstName: data.firstName || '',
+                    lastName: data.lastName || '',
+                    email: data.email || '',
+                    phone: data.phoneNumber || '',
+                    petCount: data.plasticCount ?? 0,
+                    canCount: data.metalCount ?? 0,
+                    totalReward: data.totalReward ?? 0,
                 });
             } catch (err) {
                 console.warn('Profil yüklenirken hata:', err);
