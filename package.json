@@ -1,52 +1,82 @@
 {
-  "name": "smart-reverse-vending-machine-ui",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "./",
-  "main": "electron-main.js",
-  "scripts": {
-    "start": "concurrently \"npm run react-start\" \"npm run electron-start\"",
-    "react-start": "react-scripts start",
-    "electron-start": "wait-on http://localhost:3000 && electron .",
-    "build": "react-scripts build"
-  },
-  "dependencies": {
-    "@microsoft/signalr": "^8.0.7",
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "aos": "^2.3.4",
-    "bootstrap": "^5.3.5",
-    "bootstrap-icons": "^1.11.3",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.5.3",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.2",
-    "electron": "^36.0.1",
-    "eslint": "^8.57.1",
-    "wait-on": "^8.0.3"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "smart-reverse-vending-machine-ui",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": "./",
+    "main": "build/electron.js",
+    "description": "Smart Reverse Vending Machine UI uygulaması",
+    "author": "<youremail@example.com>",
+
+    "scripts": {
+        "start": "concurrently \"npm run react-start\" \"npm run electron-start\"",
+        "react-start": "react-scripts start",
+        "electron-start": "wait-on http://localhost:3000 && electron .",
+        "build": "react-scripts build",
+        "dist": "npm run build && electron-builder",
+        "postinstall": "electron-builder install-app-deps"
+    },
+
+    "dependencies": {
+        "@microsoft/signalr": "^8.0.7",
+        "aos": "^2.3.4",
+        "bootstrap": "^5.3.5",
+        "bootstrap-icons": "^1.11.3",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-router-dom": "^7.5.3",
+        "react-scripts": "5.0.1",
+        "web-vitals": "^2.1.4"
+    },
+
+    "devDependencies": {
+        "concurrently": "^9.1.2",
+        "electron": "^36.0.1",
+        "electron-builder": "^26.0.12",
+        "eslint": "^8.57.1",
+        "wait-on": "^8.0.3"
+    },
+
+    "build": {
+        "appId": "com.atkazan.kioskapp",
+        "productName": "AtKazan",
+        "files": [
+            "build/**/*",
+            "electron-main.js",
+            "package.json"
+        ],
+        "directories": {
+            "buildResources": "assets"
+        },
+        "win": {
+            "target": [ "nsis" ]
+        },
+        "nsis": {
+            "oneClick": true,
+            "allowElevation": true,
+            "perMachine": false,
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true,
+            "shortcutName": "KioskApp"
+        }
+    },
+
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }

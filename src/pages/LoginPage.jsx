@@ -1,4 +1,3 @@
-// src/pages/LoginPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
@@ -10,22 +9,22 @@ const LoginPage = () => {
     const [values, setValues] = useState({ phone: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [isOptimalSize, setIsOptimalSize] = useState(true);
+/*    const [isOptimalSize, setIsOptimalSize] = useState(true);*/
     const navigate = useNavigate();
-    const { setToken, setTransactionNumber } = useAuth();
+    const { setToken } = useAuth();
 
-    useEffect(() => {
-        const checkSize = () => {
-            const w = window.innerWidth;
-            const h = window.innerHeight;
-            const ok = w === 800 && h === 1280;
-            setIsOptimalSize(ok);
-            if (!ok) console.warn(`Optimal ekran 800×1280. Şu anki boyut: ${w}×${h}`);
-        };
-        checkSize();
-        window.addEventListener('resize', checkSize);
-        return () => window.removeEventListener('resize', checkSize);
-    }, []);
+    //useEffect(() => {
+    //    const checkSize = () => {
+    //        const w = window.innerWidth;
+    //        const h = window.innerHeight;
+    //        const ok = w === 800 && h === 1280;
+    //        setIsOptimalSize(ok);
+    //        if (!ok) console.warn(`Optimal ekran 800×1280. Şu anki boyut: ${w}×${h}`);
+    //    };
+    //    checkSize();
+    //    window.addEventListener('resize', checkSize);
+    //    return () => window.removeEventListener('resize', checkSize);
+    //}, []);
 
     const handleChange = e => setValues({ ...values, [e.target.name]: e.target.value });
     const goToMain = () => {
@@ -45,17 +44,13 @@ const LoginPage = () => {
                 'http://192.168.1.102:5190/api/Auth/login',
                 { phoneNumber, password: values.password }
             );
-            const token = loginRes.data.token;
+            const { token, isAdmin } = loginRes.data;
             setToken(token);
-
-            const startRes = await axios.post(
-                'http://192.168.1.102:5190/api/Transaction/start',
-                {},
-                { headers: { Authorization: `Bearer ${token}` } }
-            );
-            setTransactionNumber(startRes.data.transactionNumber);
-
-            navigate('/profile');
+            if (isAdmin) {
+                navigate('/admin');
+            } else {
+                navigate('/profile');
+            }
         } catch (err) {
             setError(err.response?.data?.Error || 'Giriş başarısız.');
         } finally {

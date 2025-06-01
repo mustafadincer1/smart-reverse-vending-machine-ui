@@ -8,46 +8,42 @@ import './ProfilePage.css';
 
 const ProfilePage = () => {
     const navigate = useNavigate();
-    const { token, transactionNumber } = useAuth();
+    const { token, setTransactionNumber } = useAuth();
 
     const [profile, setProfile] = useState({
-        firstName: 'Ali',
-        lastName: 'Yılmaz',
-        email: 'ali.yilmaz@example.com',
-        phone: '0555 123 4567',
-        petCount: 45,
-        canCount: 23,
-        totalReward: 17.5,
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        petCount: 0,
+        canCount: 0,
+        totalReward: 0,
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        // only fetch if we have a token and a transactionNumber
-        if (!token || !transactionNumber) return;
+        if (!token) return;
 
         const fetchProfile = async () => {
             setLoading(true);
             setError('');
             try {
+                // Fetch actual user profile
                 const res = await axios.get(
-                    `http://192.168.1.102:5190/api/user/${transactionNumber}/profile`,
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
+                    'http://192.168.1.102:5190/api/user/profile',
+                    { headers: { Authorization: `Bearer ${token}` } }
                 );
                 const data = res.data;
-                setProfile(prev => ({
-                    // keep phone from dummy state (or extend API to return it)
-                    phone: prev.phone,
+                setProfile({
                     firstName: data.FirstName,
                     lastName: data.LastName,
                     email: data.Email,
-                    // map API counts to your UI props
+                    phone: data.PhoneNumber,
                     petCount: data.PlasticCount,
                     canCount: data.MetalCount,
                     totalReward: data.TotalReward,
-                }));
+                });
             } catch (err) {
                 console.warn('Profil yüklenirken hata:', err);
                 setError('Profil verisi alınamadı.');
@@ -57,16 +53,43 @@ const ProfilePage = () => {
         };
 
         fetchProfile();
-    }, [token, transactionNumber]);
+    }, [token]);
 
-    const handleRecycle = () => {
-        navigate('/recycle');
+    const handleRecycle = async () => {
+        try {
+            setError('');
+            // Start new transaction when user clicks
+            const startRes = await axios.post(
+                'http://192.168.1.102:5190/api/Transaction/start',
+                {},
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            setTransactionNumber(startRes.data.transactionNumber);
+            navigate('/recycle');
+        } catch (err) {
+            console.error('İşlem başlatılamadı:', err);
+            setError('Yeni işlem başlatılamadı.');
+        }
+    };
+
+    const goToMain = () => {
+        navigate('/');
     };
 
     return (
         <Layout>
             <div className="profile-wrapper">
-                <h2 className="profile-title">Profil Bilgileri</h2>
+                <div className="profile-header">
+                    <div className="back-container-profile" onClick={goToMain}>
+                        <img
+                            src={`${process.env.PUBLIC_URL}/ikons/left.png`}
+                            alt="Ana sayfaya dön"
+                            className="return-icon-profile"
+                        />
+                        {/*<span className="back-text-profile">Ana sayfaya dön</span>*/}
+                    </div>
+                    <h2 className="profile-title">Profil Bilgileri</h2>
+                </div>
 
                 {error && <div style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
 
@@ -76,19 +99,19 @@ const ProfilePage = () => {
                         <div className="info-grid">
                             <div className="info-item">
                                 <label>Ad: </label>
-                                <span>{profile.firstName}</span>
+                                <span>{profile.firstName || (loading ? '…' : '')}</span>
                             </div>
                             <div className="info-item">
                                 <label>Soyad: </label>
-                                <span>{profile.lastName}</span>
+                                <span>{profile.lastName || (loading ? '…' : '')}</span>
                             </div>
                             <div className="info-item">
                                 <label>E-posta: </label>
-                                <span>{profile.email}</span>
+                                <span>{profile.email || (loading ? '…' : '')}</span>
                             </div>
                             <div className="info-item">
                                 <label>Telefon: </label>
-                                <span>{profile.phone}</span>
+                                <span>{profile.phone || (loading ? '…' : '')}</span>
                             </div>
                         </div>
 
@@ -103,7 +126,7 @@ const ProfilePage = () => {
 
                         <div className="stats-grid">
                             <div className="stat-card">
-                                <img src="/ikons/water.png" alt="PET şişe" />
+                                <img src={`${process.env.PUBLIC_URL}/ikons/water.png`} alt="PET şişe" />
                                 <div className="stat-data">
                                     <div className="stat-label">PET Şişe</div>
                                     <div className="stat-value">
@@ -113,7 +136,7 @@ const ProfilePage = () => {
                             </div>
 
                             <div className="stat-card">
-                                <img src="/ikons/can.png" alt="Metal kutu" />
+                                <img src={`${process.env.PUBLIC_URL}/ikons/can.png`} alt="Metal kutu" />
                                 <div className="stat-data">
                                     <div className="stat-label">Metal Kutu</div>
                                     <div className="stat-value">
@@ -134,11 +157,10 @@ const ProfilePage = () => {
                     </div>
                 </div>
 
-                <div className="action-button">
+                <div className="action-button" onClick={handleRecycle}>
                     <img
                         src={`${process.env.PUBLIC_URL}/ikons/geri-donusume-basla.png`}
                         alt="Geri Dönüşüme Başla"
-                        onClick={handleRecycle}
                         className="action-button_icon"
                     />
                 </div>
@@ -148,4 +170,3 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
-

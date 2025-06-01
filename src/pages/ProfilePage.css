@@ -1,5 +1,4 @@
-﻿/* src/pages/ProfilePage.css */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 .profile-wrapper {
     width: 100%;
@@ -15,11 +14,50 @@
     padding-bottom: 12rem;
 }
 
+.profile-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.back-container-profile {
+    position: absolute;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.return-icon-profile {
+    width: 60px;
+    height: auto;
+    transition: transform 0.2s ease;
+}
+
+    .return-icon-profile:hover {
+        transform: scale(1.1);
+    }
+
+.back-text-profile {
+    font-size: 1.6rem;
+    color: #2e4c6d;
+    margin-top: 0.3rem;
+    text-align: center;
+}
+
+    .back-text-profile:hover {
+        text-decoration: underline;
+    }
+
 .profile-title {
     color: #002366;
     font-size: 3.8rem;
     font-weight: 300;
-    margin-bottom: 2rem;
+    margin: 0;
     text-align: center;
 }
 
@@ -126,8 +164,8 @@
 
 .total-card {
     background: #f0f9ff;
-    border-radius: 16px;
-    padding: 3.25rem;
+    border-radius: 12px;
+    padding: 3rem;
     text-align: center;
     border: 1px solid #e0f2fe;
 }
@@ -135,7 +173,7 @@
 .total-label {
     font-size: 2.9rem;
     color: #0369a1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
 }
 
 .total-value {
@@ -152,8 +190,8 @@
 }
 
 .action-button_icon {
-    width: 550px;
-    height: 550px;
+    width: 580px;
+    height: 580px;
     object-fit: contain;
     position: absolute;
     transform: translateY(10rem);
