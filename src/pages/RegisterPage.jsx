@@ -87,6 +87,8 @@ const RegisterPage = () => {
                         id="firstName"
                         value={values.firstName}
                         onChange={handleChange}
+                        inputMode="text"
+                        pattern="[a-zA-ZğüşöçıİĞÜŞÖÇ\s]*"
                         placeholder="Adınız"
                         required
                     />
@@ -98,6 +100,8 @@ const RegisterPage = () => {
                         id="lastName"
                         value={values.lastName}
                         onChange={handleChange}
+                        inputMode="text"
+                        pattern="[a-zA-ZğüşöçıİĞÜŞÖÇ\s]*"
                         placeholder="Soyadınız"
                         required
                     />
