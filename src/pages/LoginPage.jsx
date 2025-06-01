@@ -72,6 +72,8 @@ const LoginPage = () => {
                             id="phone"
                             value={values.phone}
                             onChange={handleChange}
+                            inputMode="numeric"     
+                            pattern="[0-9]*"        
                             placeholder="5XX XXX XXXX"
                             required
                         />
@@ -83,6 +85,8 @@ const LoginPage = () => {
                             id="password"
                             value={values.password}
                             onChange={handleChange}
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             required
                         />
 
