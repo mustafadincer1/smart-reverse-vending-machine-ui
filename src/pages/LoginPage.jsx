@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useAuth } from '../context/AuthContext';
@@ -9,22 +9,37 @@ const LoginPage = () => {
     const [values, setValues] = useState({ phone: '', password: '' });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-/*    const [isOptimalSize, setIsOptimalSize] = useState(true);*/
     const navigate = useNavigate();
     const { setToken } = useAuth();
 
-    //useEffect(() => {
-    //    const checkSize = () => {
-    //        const w = window.innerWidth;
-    //        const h = window.innerHeight;
-    //        const ok = w === 800 && h === 1280;
-    //        setIsOptimalSize(ok);
-    //        if (!ok) console.warn(`Optimal ekran 800×1280. Şu anki boyut: ${w}×${h}`);
-    //    };
-    //    checkSize();
-    //    window.addEventListener('resize', checkSize);
-    //    return () => window.removeEventListener('resize', checkSize);
-    //}, []);
+    // Timeout için referans
+    const timeoutRef = useRef(null);
+
+    // Timeout sıfırlama fonksiyonu
+    const resetTimeout = useCallback(() => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+            navigate('/');
+        }, 45000); // 45 saniye
+    }, [navigate]);
+
+    useEffect(() => {
+        const resetter = () => resetTimeout();
+        window.addEventListener("mousemove", resetter);
+        window.addEventListener("keydown", resetter);
+        window.addEventListener("mousedown", resetter);
+        window.addEventListener("touchstart", resetter);
+
+        resetTimeout();
+
+        return () => {
+            window.removeEventListener("mousemove", resetter);
+            window.removeEventListener("keydown", resetter);
+            window.removeEventListener("mousedown", resetter);
+            window.removeEventListener("touchstart", resetter);
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, [resetTimeout]);
 
     const handleChange = e => setValues({ ...values, [e.target.name]: e.target.value });
     const goToMain = () => {
@@ -72,8 +87,8 @@ const LoginPage = () => {
                             id="phone"
                             value={values.phone}
                             onChange={handleChange}
-                            inputMode="numeric"     
-                            pattern="[0-9]*"        
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             placeholder="5XX XXX XXXX"
                             required
                         />
@@ -102,12 +117,10 @@ const LoginPage = () => {
                         >
                             Parolamı Unuttum?
                         </button>
-
                     </div>
                     <div className="register-link">
                         Hesabınız yok mu? <a href="#/register">Kayıt Ol</a>
                     </div>
-
                 </div>
                 <div className="back-container" onClick={goToMain}>
                     <img

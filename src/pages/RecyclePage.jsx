@@ -1,5 +1,5 @@
 // src/pages/RecyclePage.jsx
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { HubConnectionBuilder, LogLevel } from "@microsoft/signalr";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -15,6 +15,40 @@ const RecyclePage = () => {
 
     const [counts, setCounts] = useState({ pet: 0, teneke: 0 });
     const [rewards, setRewards] = useState({ pet: 0, teneke: 0 });
+
+    // Timeout için referans
+    const timeoutRef = useRef(null);
+
+    // Otomatik işlem tamamlama ve ana sayfaya yönlendirme
+    const handleAutoComplete = useCallback(async () => {
+        try {
+            // complete endpoint'i ile işlemi bitir
+            await fetch(
+                `http://192.168.1.102:5190/api/Transaction/complete/${transactionNumber}`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        selectedOption: "Kendi Hesabıma Aktar"
+                    })
+                }
+            );
+        } catch (err) {
+            // hata olsa bile ana sayfaya dön
+        }
+        navigate("/");
+    }, [navigate, token, transactionNumber]);
+
+    // Timeout sıfırlama fonksiyonu
+    const resetTimeout = useCallback(() => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+            handleAutoComplete();
+        }, 45000); // 45 saniye
+    }, [handleAutoComplete]);
 
     useEffect(() => {
         AOS.init({ duration: 600, once: true });
@@ -40,6 +74,7 @@ const RecyclePage = () => {
                     ...p,
                     [key]: parseFloat((p[key] + 0.25).toFixed(2)),
                 }));
+                resetTimeout(); // SignalR'dan veri gelirse timeout sıfırlansın
             }
         });
         conn.start().catch(console.error);
@@ -48,8 +83,26 @@ const RecyclePage = () => {
             conn.stop();
             connectionRef.current = null;
         };
-    }, [token, transactionNumber]);
+    }, [token, transactionNumber, resetTimeout]);
 
+    // Tuş, tıklama ve hareketlerde timeout sıfırlansın
+    useEffect(() => {
+        const resetter = () => resetTimeout();
+        window.addEventListener("mousemove", resetter);
+        window.addEventListener("keydown", resetter);
+        window.addEventListener("touchstart", resetter);
+
+        resetTimeout(); // Sayfa açılır açılmaz başlat
+
+        return () => {
+            window.removeEventListener("mousemove", resetter);
+            window.removeEventListener("keydown", resetter);
+            window.removeEventListener("touchstart", resetter);
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, [resetTimeout]);
+
+    // Kullanıcı manuel tamamladığında
     const handleComplete = async () => {
         try {
             const res = await fetch(

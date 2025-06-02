@@ -1,5 +1,5 @@
-/* src/pages/TransactionPage.jsx */
-import React, { useState } from "react";
+// src/pages/TransactionPage.jsx
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
@@ -17,6 +17,53 @@ const TransactionPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    // Timeout için referans
+    const timeoutRef = useRef(null);
+
+    // Timeout sıfırlama fonksiyonu
+    const resetTimeout = useCallback(() => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+            handleAutoComplete();
+        }, 45000); // 45 saniye
+    }, [token, transactionNumber, totalReward]);
+
+    // Otomatik işlem tamamlama ve ana sayfaya yönlendirme
+    const handleAutoComplete = async () => {
+        try {
+            // Otomatik olarak "Kendi Hesabıma Aktar" seçeneğiyle tamamla
+            await axios.post(
+                `http://192.168.1.102:5190/api/Transaction/complete/${transactionNumber}`,
+                {
+                    selectedOption: "Kendi Hesabıma Aktar",
+                    totalReward
+                },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            navigate("/complete", {
+                state: { totalReward, selectedOption: "Kendi Hesabıma Aktar" }
+            });
+        } catch {
+            navigate("/");
+        }
+    };
+
+    useEffect(() => {
+        const resetter = () => resetTimeout();
+        window.addEventListener("mousemove", resetter);
+        window.addEventListener("keydown", resetter);
+        window.addEventListener("touchstart", resetter);
+
+        resetTimeout();
+
+        return () => {
+            window.removeEventListener("mousemove", resetter);
+            window.removeEventListener("keydown", resetter);
+            window.removeEventListener("touchstart", resetter);
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, [resetTimeout]);
+
     const options = [
         { name: "Doğa ve Çevre Vakfı", icon: "doga-ve-cevre-bagisla.png" },
         { name: "Turkish Marine", icon: "turkish-marine-bagisla.png" },
@@ -29,6 +76,7 @@ const TransactionPage = () => {
         setSelectedOption(name);
         setError("");
         setModalVisible(true);
+        resetTimeout();
     };
 
     // Onaylandığında API çağrısı ve yönlendirme
@@ -36,7 +84,6 @@ const TransactionPage = () => {
         try {
             setLoading(true);
             setError("");
-            // Tamamlama endpoint'ine istek gönder
             await axios.post(
                 `http://192.168.1.102:5190/api/Transaction/complete/${transactionNumber}`,
                 {
@@ -45,7 +92,6 @@ const TransactionPage = () => {
                 },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            // Başarılıysa tamam sayfasına yönlendir
             navigate("/complete", {
                 state: { totalReward, selectedOption }
             });

@@ -1,4 +1,5 @@
-﻿import React, { useState } from 'react';
+﻿// src/pages/AdminPage.jsx
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Layout from '../components/Layout';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
@@ -10,6 +11,33 @@ const AdminPage = () => {
     const [loadingBottom, setLoadingBottom] = useState(false);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+
+    // Timeout için referans ve sıfırlama fonksiyonu
+    const timeoutRef = useRef(null);
+    const resetTimeout = useCallback(() => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+            window.location.href = '/';
+        }, 45000);
+    }, []);
+
+    useEffect(() => {
+        const resetter = () => resetTimeout();
+        window.addEventListener("mousemove", resetter);
+        window.addEventListener("keydown", resetter);
+        window.addEventListener("mousedown", resetter);
+        window.addEventListener("touchstart", resetter);
+
+        resetTimeout();
+
+        return () => {
+            window.removeEventListener("mousemove", resetter);
+            window.removeEventListener("keydown", resetter);
+            window.removeEventListener("mousedown", resetter);
+            window.removeEventListener("touchstart", resetter);
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, [resetTimeout]);
 
     const handleOpenUpper = async () => {
         try {

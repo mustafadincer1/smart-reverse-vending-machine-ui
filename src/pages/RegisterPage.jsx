@@ -1,11 +1,8 @@
-﻿// src/pages/RegisterPage.jsx
-import React, { useState } from 'react';
+﻿import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import axios from 'axios';
 import './RegisterPage.css';
-
-
 
 const RegisterPage = () => {
     const [values, setValues] = useState({
@@ -20,6 +17,35 @@ const RegisterPage = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    // Timeout için referans
+    const timeoutRef = useRef(null);
+
+    // Timeout sıfırlama fonksiyonu
+    const resetTimeout = useCallback(() => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+            navigate('/');
+        }, 45000);
+    }, [navigate]);
+
+    useEffect(() => {
+        const resetter = () => resetTimeout();
+        window.addEventListener("mousemove", resetter);
+        window.addEventListener("keydown", resetter);
+        window.addEventListener("mousedown", resetter);
+        window.addEventListener("touchstart", resetter);
+
+        resetTimeout();
+
+        return () => {
+            window.removeEventListener("mousemove", resetter);
+            window.removeEventListener("keydown", resetter);
+            window.removeEventListener("mousedown", resetter);
+            window.removeEventListener("touchstart", resetter);
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, [resetTimeout]);
+
     const handleChange = e => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
@@ -30,7 +56,6 @@ const RegisterPage = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         const phoneNumber = values.phone.replace(/\s/g, '');
-        // Basit validasyon
         if (
             !values.firstName ||
             !values.lastName ||

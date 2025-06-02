@@ -1,5 +1,5 @@
 ﻿// src/pages/ProfilePage.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Layout from '../components/Layout';
@@ -22,6 +22,34 @@ const ProfilePage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+    // Timeout için referans ve sıfırlama fonksiyonu
+    const timeoutRef = useRef(null);
+    const resetTimeout = useCallback(() => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
+            navigate('/');
+        }, 45000);
+    }, [navigate]);
+
+    useEffect(() => {
+        // Her türlü kullanıcı etkileşimi ile timeout sıfırlansın
+        const resetter = () => resetTimeout();
+        window.addEventListener("mousemove", resetter);
+        window.addEventListener("keydown", resetter);
+        window.addEventListener("mousedown", resetter);
+        window.addEventListener("touchstart", resetter);
+
+        resetTimeout();
+
+        return () => {
+            window.removeEventListener("mousemove", resetter);
+            window.removeEventListener("keydown", resetter);
+            window.removeEventListener("mousedown", resetter);
+            window.removeEventListener("touchstart", resetter);
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, [resetTimeout]);
+
     useEffect(() => {
         if (!token) return;
 
@@ -32,9 +60,9 @@ const ProfilePage = () => {
                 // Fetch actual user profile
                 const res = await axios.post(
                     'http://192.168.1.102:5190/api/user/profile',
-                    {}, 
-                    { headers: { Authorization: `Bearer ${token}` } } // headers burada
-                    );
+                    {},
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
                 const data = res.data;
                 setProfile({
                     firstName: data.firstName || '',
