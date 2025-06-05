@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import './AdminPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const AdminPage = () => {
     const { token } = useAuth();
@@ -11,6 +12,7 @@ const AdminPage = () => {
     const [loadingBottom, setLoadingBottom] = useState(false);
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     // Timeout için referans ve sıfırlama fonksiyonu
     const timeoutRef = useRef(null);
@@ -56,7 +58,9 @@ const AdminPage = () => {
             setLoadingUpper(false);
         }
     };
-
+      const goToMain = () => {
+        navigate('/');
+    };
     const handleOpenBottom = async () => {
         try {
             setLoadingBottom(true);
@@ -102,7 +106,7 @@ const AdminPage = () => {
                     <button className="footer-button close-app" onClick={() => window.close()}>
                         Uygulamayı Kapat
                     </button>
-                    <button className="footer-button go-home" onClick={() => window.location.href = '/'}>
+                    <button className="footer-button go-home" onClick={goToMain}>
                         Ana Sayfaya Dön
                     </button>
                 </div>

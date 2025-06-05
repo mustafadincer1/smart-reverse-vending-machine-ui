@@ -69,10 +69,15 @@ const RecyclePage = () => {
         conn.on("ProcessingStatus", (msg) => {
             if (msg.status === "success") {
                 const key = msg.data.materialType === 0 ? "pet" : "teneke";
-                setCounts(p => ({ ...p, [key]: p[key] + 1 }));
-                setRewards(p => ({
-                    ...p,
-                    [key]: parseFloat((p[key] + 0.25).toFixed(2)),
+                const reward = parseFloat(msg.data.totalReward?.toFixed(2) || "0");
+                setCounts(prev => ({
+                    ...prev,
+                    [key]: prev[key] + 1
+                }));
+
+                setRewards(prev => ({
+                    ...prev,
+                    [key]: parseFloat((prev[key] + reward).toFixed(2))
                 }));
                 resetTimeout(); // SignalR'dan veri gelirse timeout sıfırlansın
             }
