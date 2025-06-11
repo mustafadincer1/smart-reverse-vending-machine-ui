@@ -102,6 +102,69 @@ html {
         box-shadow: 0 0 8px rgba(0, 35, 102, 0.2);
     }
 
+/* Sayısal input için özel stiller */
+input[data-type="numeric"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    font-variant-numeric: tabular-nums;
+    text-align: left;
+}
+
+input[data-type="numeric"]::-webkit-outer-spin-button,
+input[data-type="numeric"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Telefon numarası input'u için büyük font */
+input[name="phone"] {
+    font-size: 2rem !important;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+input[name="phone"]::placeholder {
+    font-size: 1.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* Tablet/dokunmatik cihazlar için optimizasyon */
+@media (pointer: coarse) {
+    input[data-type="numeric"] {
+        font-size: 2.2rem;
+        padding: 1.5rem 1.2rem;
+        min-height: 6rem;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    input[name="phone"] {
+        font-size: 2.4rem !important;
+        min-height: 6.5rem;
+        padding: 1.8rem 1.2rem;
+    }
+    
+    /* Büyük ekranlar için input boyutlarını artır */
+    .login-form input {
+        min-height: 5.5rem;
+        font-size: 1.8rem;
+    }
+}
+
+/* Electron ve Windows tablet için ek optimizasyonlar */
+@media screen and (min-width: 768px) and (pointer: coarse) {
+    input[data-type="numeric"] {
+        font-size: 2.5rem;
+        min-height: 7rem;
+        padding: 2rem 1.5rem;
+    }
+    
+    input[name="phone"] {
+        font-size: 2.8rem !important;
+        min-height: 7.5rem;
+    }
+}
+
 /* Login button */
 .btn-login {
     width: 100%;
@@ -127,6 +190,15 @@ html {
         box-shadow: 0 6px 20px rgba(86, 242, 104, 0.3);
     }
 
+/* Dokunmatik cihazlar için buton büyütme */
+@media (pointer: coarse) {
+    .btn-login {
+        height: 6rem;
+        font-size: 2.2rem;
+        margin-top: 3.5rem;
+    }
+}
+
 /* Form links (forgot password) */
 .form-links {
     display: flex;
@@ -142,6 +214,8 @@ html {
     color: #4caf50;
     font-weight: 700;
     cursor: pointer;
+    min-height: 48px; /* Touch target minimum */
+    padding: 8px 12px;
 }
 
     .forgot-password:hover,
@@ -160,17 +234,25 @@ html {
         color: #4caf50;
         font-weight: 540;
         text-decoration: none;
+        min-height: 48px;
+        display: inline-block;
+        padding: 8px 4px;
     }
 
         .register-link a:hover {
             text-decoration: underline;
         }
 
- Geri dön bloğu 
+/* Geri dön bloğu */
 .back-container {
     text-align: center;
     margin-top: 4rem;
     cursor: pointer;
+    min-height: 120px; /* Touch target için yeterli alan */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .return-icon {
@@ -182,7 +264,7 @@ html {
     transition: transform 0.2s ease;
 }
 
-     İkonun hover efekti 
+    /* İkonun hover efekti */
     .return-icon:hover {
         transform: scale(1.1);
     }
@@ -195,12 +277,51 @@ html {
     margin-top: 0.5rem;
 }
 
-     Metin hover efekti 
+    /* Metin hover efekti */
     .back-text:hover {
         text-decoration: underline;
     }
 
+/* Dokunmatik cihazlar için geri dön alanını büyüt */
+@media (pointer: coarse) {
+    .back-container {
+        min-height: 140px;
+        margin-top: 5rem;
+    }
+    
+    .return-icon {
+        width: 100px;
+    }
+    
+    .back-text {
+        font-size: 2.1rem;
+        margin-top: 1rem;
+    }
+}
+
 /* Ensure no overflow */
 .login-page {
     overflow: hidden;
+}
+
+/* Sayısal klavye açılması için ek CSS hint'leri */
+input[inputmode="numeric"] {
+    font-feature-settings: "tnum";
+    -webkit-text-security: none;
+}
+
+/* Focus durumunda ekstra görsel geri bildirim */
+input[data-type="numeric"]:focus {
+    border-color: #4caf50 !important;
+    box-shadow: 0 0 12px rgba(76, 175, 80, 0.3) !important;
+    transform: scale(1.02);
+}
+
+/* Windows High Contrast Mode desteği */
+@media (prefers-contrast: high) {
+    input[data-type="numeric"] {
+        border: 2px solid;
+        background: white;
+        color: black;
+    }
 }

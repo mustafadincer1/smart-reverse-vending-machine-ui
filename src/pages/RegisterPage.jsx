@@ -46,9 +46,38 @@ const RegisterPage = () => {
         };
     }, [resetTimeout]);
 
+    // Telefon numarası için özel değişiklik fonksiyonu
+    const handlePhoneChange = (e) => {
+        const value = e.target.value;
+        // Sadece rakamları kabul et
+        const numericValue = value.replace(/[^0-9]/g, '');
+        setValues({ ...values, phone: numericValue });
+    };
+
+    // Telefon input'una focus olduğunda sayısal klavyeyi zorunlu kıl
+    const handlePhoneFocus = (e) => {
+        e.target.setAttribute('inputmode', 'numeric');
+        e.target.setAttribute('pattern', '[0-9]*');
+        // Electron için ek ayarlar
+        if (window.electronAPI) {
+            window.electronAPI.setVirtualKeyboard('numeric');
+        }
+    };
+
+    // Klavye tuşlarını kontrol et
+    const handlePhoneKeyPress = (e) => {
+        // Sadece sayıları, backspace, delete, tab, enter tuşlarına izin ver
+        const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'];
+        if (!allowedKeys.includes(e.key) && !/[0-9]/.test(e.key)) {
+            e.preventDefault();
+        }
+    };
+
+    // Diğer alanlar için normal değişiklik fonksiyonu
     const handleChange = e => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
+
     const goToMain = () => {
         navigate('/');
     };
@@ -115,6 +144,7 @@ const RegisterPage = () => {
                         inputMode="text"
                         pattern="[a-zA-ZğüşöçıİĞÜŞÖÇ\s]*"
                         placeholder="Adınız"
+                        autoComplete="given-name"
                         required
                     />
 
@@ -128,6 +158,7 @@ const RegisterPage = () => {
                         inputMode="text"
                         pattern="[a-zA-ZğüşöçıİĞÜŞÖÇ\s]*"
                         placeholder="Soyadınız"
+                        autoComplete="family-name"
                         required
                     />
 
@@ -137,8 +168,16 @@ const RegisterPage = () => {
                         name="phone"
                         id="phone"
                         value={values.phone}
-                        onChange={handleChange}
-                        placeholder="5XX XXX XXXX"
+                        onChange={handlePhoneChange}
+                        onFocus={handlePhoneFocus}
+                        onKeyDown={handlePhoneKeyPress}
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        placeholder="5XXXXXXXXX"
+                        maxLength="10"
+                        data-type="numeric"
+                        enterKeyHint="next"
+                        autoComplete="tel"
                         required
                     />
 
@@ -149,7 +188,9 @@ const RegisterPage = () => {
                         id="email"
                         value={values.email}
                         onChange={handleChange}
+                        inputMode="email"
                         placeholder="ornek@mail.com"
+                        autoComplete="email"
                         required
                     />
 
@@ -160,6 +201,7 @@ const RegisterPage = () => {
                         id="password"
                         value={values.password}
                         onChange={handleChange}
+                        autoComplete="new-password"
                         required
                     />
 
@@ -170,6 +212,7 @@ const RegisterPage = () => {
                         id="confirmPassword"
                         value={values.confirmPassword}
                         onChange={handleChange}
+                        autoComplete="new-password"
                         required
                     />
 

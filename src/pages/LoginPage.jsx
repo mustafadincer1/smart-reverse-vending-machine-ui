@@ -41,7 +41,36 @@ const LoginPage = () => {
         };
     }, [resetTimeout]);
 
+    // Telefon numarası için özel değişiklik fonksiyonu
+    const handlePhoneChange = (e) => {
+        const value = e.target.value;
+        // Sadece rakamları kabul et
+        const numericValue = value.replace(/[^0-9]/g, '');
+        setValues({ ...values, phone: numericValue });
+    };
+
+    // Telefon input'una focus olduğunda sayısal klavyeyi zorunlu kıl
+    const handlePhoneFocus = (e) => {
+        e.target.setAttribute('inputmode', 'numeric');
+        e.target.setAttribute('pattern', '[0-9]*');
+        // Electron için ek ayarlar
+        if (window.electronAPI) {
+            window.electronAPI.setVirtualKeyboard('numeric');
+        }
+    };
+
+    // Klavye tuşlarını kontrol et
+    const handlePhoneKeyPress = (e) => {
+        // Sadece sayıları, backspace, delete, tab, enter tuşlarına izin ver
+        const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'];
+        if (!allowedKeys.includes(e.key) && !/[0-9]/.test(e.key)) {
+            e.preventDefault();
+        }
+    };
+
+    // Diğer alanlar için normal değişiklik fonksiyonu
     const handleChange = e => setValues({ ...values, [e.target.name]: e.target.value });
+
     const goToMain = () => {
         navigate('/');
     };
@@ -86,10 +115,16 @@ const LoginPage = () => {
                             name="phone"
                             id="phone"
                             value={values.phone}
-                            onChange={handleChange}
+                            onChange={handlePhoneChange}
+                            onFocus={handlePhoneFocus}
+                            onKeyDown={handlePhoneKeyPress}
                             inputMode="numeric"
                             pattern="[0-9]*"
-                            placeholder="5XX XXX XXXX"
+                            placeholder="5XXXXXXXXX"
+                            maxLength="10"
+                            autoComplete="tel"
+                            data-type="numeric"
+                            enterKeyHint="next"
                             required
                         />
 
@@ -102,6 +137,7 @@ const LoginPage = () => {
                             onChange={handleChange}
                             inputMode="numeric"
                             pattern="[0-9]*"
+                            autoComplete="current-password"
                             required
                         />
 
